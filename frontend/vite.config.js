@@ -4,6 +4,14 @@ import react from '@vitejs/plugin-react';
 import eslintPlugin from 'vite-plugin-eslint';
 
 export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000',
+        secure: false
+      }
+    },
+  },
   plugins: [
     react(),
     eslintPlugin({
@@ -12,11 +20,6 @@ export default defineConfig({
       include: ['./src/**/*.js', './src/**/*.jsx'],
       exclude: [],
     }),
-  ],
-  server: {
-    port: 3000,
-    proxy: {
-      '/api': 'http://localhost:5000',
-    },
-  },
+  ]
+
 });
